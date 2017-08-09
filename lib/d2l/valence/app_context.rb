@@ -29,10 +29,10 @@ module D2L
       # @param [URI::Generic] callback_uri URI to redirect to post authentication
       # @return [String] URL for authentication
       def auth_url(callback_uri)
-        @brightspace_host.to_uri(
-          path: AUTH_SERVICE_URI_PATH,
-          query: query_params_using(callback_url: callback_uri.to_s)
-        ).to_s
+        uri = URI(@brightspace_host)
+        uri.path = AUTH_SERVICE_URI_PATH
+        uri.query = query_params_using(callback_url: callback_uri.to_s)
+        uri.to_s
       end
 
       private
